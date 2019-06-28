@@ -1,0 +1,1053 @@
+<!-- 商品详情： commodity -->
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>仿美团购物车</title>
+		<script type="text/javascript">
+			//rem适配
+			(function() {
+				var styleN = document.createElement("style");
+				var width = document.documentElement.clientWidth / 750;
+				styleN.innerHTML = 'html{font-size:' + width + 'px!important}';
+				document.head.appendChild(styleN);
+			})();
+		</script>
+		<style>
+			/*商品logo*/
+		.shopLogo {
+			margin-top: 45px !important;
+		}
+	
+		.shopLogo {
+			width: 100%;
+			height: 10.5rem;
+			background: url("/addons/hairdressing/template/res/img/canyin/shopbg.png") no-repeat;
+			background-size: 100% 100%;
+			padding: 1.0rem;
+			box-sizing: border-box;
+			display: flex;
+			display: -webkit-flex;
+		}
+	
+		.lo-left {
+			width: 7.5rem;
+			height: 7.5rem;
+			display: flex;
+			display: -webkit-flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			margin-right: 1.0rem;
+		}
+	
+		.lo-right {
+			margin-top: 3.5rem;
+		}
+	
+		.lo-1 {
+			font-size: 1.6rem;
+			font-family: PingFang-SC-Bold;
+			font-weight: bold;
+			color: rgba(255, 255, 255, 1);
+		}
+	
+		.lo-2 {
+			font-size: 1.1rem;
+			font-family: PingFang-SC-Regular;
+			font-weight: 400;
+			color: rgba(255, 255, 255, 1);
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	
+		/*tab 切换*/
+		.shop-tab {
+			width: 100%;
+			box-sizing: border-box;
+			background: white;
+		}
+	
+		/*tab-top*/
+		.sp-top {
+			height: 5.0rem;
+			display: flex;
+			display: -webkit-flex;
+			align-items: center;
+		}
+	
+		.sp-top > div {
+			width: calc(100% / 2);
+			display: flex;
+			display: -webkit-flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			position: relative;
+		}
+	
+		.sp-top > div > span {
+			display: block;
+			height: 100%;
+			line-height: 5.0rem;
+			font-size: 1.7rem;
+			font-family: PingFang-SC-Medium;
+			font-weight: 500;
+			color: rgba(51, 51, 51, 1);
+		}
+	
+		.huis {
+			font-size: 1.2rem;
+			font-family: PingFang-SC-Medium;
+			font-weight: 500;
+			color: rgba(102, 102, 102, 1);
+		}
+	
+		/*添加类*/
+		.sp-span-article {
+			border-bottom: .2rem solid red;
+			box-sizing: border-box;
+		}
+	
+		/*tab--1*/
+		.sp-bot-1 {
+			display: flex;
+			display: -webkit-flex;
+		}
+	
+		.bot-left {
+			width: 8.0rem;
+			background-color: #F8F8F8;
+		}
+	
+		.l-ul > li {
+			width: 100%;
+			height: 5.0rem;
+			text-align: center;
+			line-height: 5.0rem;
+		}
+	
+		.l-ul > li {
+			position: relative;
+			padding: .5rem;
+			font-size: 1.4rem;
+			font-family: PingFang-SC-Medium;
+			font-weight: 500;
+			color: rgba(51, 51, 51, 1);
+		}
+	
+		.l-ul > li > .li-b {
+			display: block;
+			/*height: 1.5rem;*/
+			/*width: 1.5rem;*/
+			/*line-height: 1.0rem;*/
+			position: absolute;
+			top: 1.4rem;
+			right: .3rem;
+		}
+	
+		.l-ul > li > .li-b > span {
+			display: block;
+			height: 1.5rem;
+			min-width: 1.5rem;
+			line-height: 1.3rem;
+			color: white;
+			font-size: 1.0rem;
+			text-align: center;
+			background: rgba(255, 19, 16, 1);
+			border-radius: 1.0rem;
+			padding: .1rem .2rem;
+		}
+	
+		.bot-right {
+			width: calc(100% - 8.0rem);
+		}
+	
+		.b-tit {
+			font-size: 1.4rem;
+			font-family: PingFang-SC-Medium;
+			font-weight: 500;
+			color: rgba(102, 102, 102, 1);
+			line-height: 2.0rem;
+			padding-left: 1.0rem;
+			margin-top: 1.0rem;
+			box-sizing: content-box;
+		}
+	
+		.r-ul {
+			padding: 1.0rem .5rem;
+			box-sizing: border-box;
+		}
+	
+		.r-ul-li {
+			display: flex;
+			display: -webkit-flex;
+			border-bottom: .1rem solid rgba(238, 238, 238, 1);
+		}
+	
+		.sp-b-l {
+			width: 9.2rem;
+			height: 9.2rem;
+			margin-right: .5rem;
+			display: flex;
+			display: -webkit-flex;
+			justify-content: center;
+			align-items: center;
+		}
+	
+		.sp-b-l > img {
+			width: 100%;
+			height: auto;
+		}
+	
+		.sp-b-r {
+			height: 100%;
+			/*width: calc(100% - 11.0rem);*/
+			width: 100%;
+		}
+	
+		.sp-b-r-p1 {
+			font-size: 1.3rem;
+			font-family: PingFang-SC-Bold;
+			font-weight: bold;
+			color: rgba(51, 51, 51, 1);
+			line-height: 2.0rem;
+		}
+	
+		.sp-b-r-p2 {
+			font-size: 1.1rem;
+			font-family: PingFang-SC-Medium;
+			font-weight: 500;
+			color: rgba(102, 102, 102, 1);
+			line-height: 2.0rem;
+		}
+	
+		.sp-b-r-p3 {
+			font-size: 1.0rem;
+			font-family: PingFang-SC-Regular;
+			font-weight: 400;
+			color: rgba(102, 102, 102, 1);
+			line-height: 2.0rem;
+		}
+	
+		.sp-b-r-p4 {
+			display: flex;
+			display: -webkit-flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+	
+		.sp-b-r-p4-hong {
+			font-size: 1.6rem;
+			font-family: PingFang-SC-Medium;
+			font-weight: 500;
+			color: rgba(255, 19, 16, 1);
+			line-height: 1.8rem;
+		}
+	
+		/*tab 2*/
+		.sp-bot-2 > ul {
+			padding: 1.0rem;
+			box-sizing: border-box;
+		}
+	
+		.sp-bot-2 > ul > li {
+			border-bottom: .1rem solid #EEEEEE;
+			padding: .5rem 0;
+		}
+	
+		.n-1 {
+			margin-top: 1.5rem;
+			display: flex;
+			height: 4.0rem;
+			align-items: center;
+		}
+	
+		.n-1 > img {
+			display: block;
+			width: 3.5rem;
+			height: 3.5rem;
+			margin-right: .8rem;
+		}
+	
+		.n-name {
+			margin-right: .5rem;
+		}
+	
+		.s-xing {
+			display: block;
+			width: 1.3rem;
+			height: 1.3rem;
+			margin: 0 .2rem;
+		}
+	
+		.s-xing > img {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+	
+		.n-txt {
+			color: #333;
+			font-size: 1.4rem;
+		}
+	
+		.imgs {
+			width: 100%;
+			padding: .5rem 0;
+			box-sizing: border-box;
+			display: flex;
+			justify-content: space-around;
+		}
+	
+		.imgs > img {
+			display: block;
+			width: 11.0rem;
+			height: 11.0rem;
+		}
+	
+	
+		.n-timer {
+			font-size: 1.8rem;
+			font-family: PingFang-SC-Regular;
+			font-weight: 400;
+			color: rgba(102, 102, 102, 1);
+			line-height: 1.9rem;
+		}
+	
+	
+		/********************************************/
+		/*底部*/
+		.footer-buy {
+			width: 100%;
+			height: 4.9rem;
+			display: flex;
+			display: -webkit-flex;
+			position: fixed;
+			bottom: 0;
+		}
+	
+		.box-l {
+			background-color: #22242E;
+			/*width: 26.5rem;*/
+			width: 69.5rem;
+			height: 100%;
+			display: flex;
+			display: -webkit-flex;
+		}
+	
+		.img {
+			margin: 0 1.0rem;
+			position: relative;
+			top: 0rem;
+			width: 5.0rem;
+			height: 5.0rem;
+			overflow: hidden;
+		}
+	
+		.img .titnum {
+			position: absolute;
+			top: 0.3rem;
+			right: 0.3rem;
+			display: block;
+			min-width: 1.5rem;
+			height: 1.5rem;
+			font-size: 1.0rem;
+			line-height: 1.0rem;
+			text-align: center;
+			background-color: red;
+			border-radius: 50%;
+			padding: .2rem;
+			color: white;
+		}
+	
+		.right {
+			width: calc(100% - 6.0rem);
+			color: white;
+			display: flex;
+			display: -webkit-flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+	
+		.f-r-p1 {
+			font-size: 1.8rem;
+			font-family: PingFang-SC-Medium;
+			font-weight: 500;
+			color: rgba(255, 255, 255, 1);
+			line-height: 2.0rem;
+		}
+	
+		.f-r-p2 {
+			font-size: 1.2rem;
+			font-family: PingFang-SC-Regular;
+			font-weight: 400;
+			color: rgba(255, 255, 255, 1);
+			line-height: 2.0rem;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+	
+		.box-r {
+			/*width: calc(100% - 26.5rem);*/
+			width: 100%;
+			background: linear-gradient(to right, #FF1210, #FF6001);
+			text-align: center;
+			font-size: 1.6rem;
+			font-family: PingFang-SC-Medium;
+			font-weight: 500;
+			color: rgba(255, 255, 255, 1);
+			line-height: 4.9rem;
+		}
+	
+	
+		/*--------------按钮-----------------------*/
+		.prick {
+			/*border:1rem solid #cecece;*/
+			/*border-radius: 50rem;*/
+		}
+	
+		.jian,
+		.jia {
+			display: inline-block;
+			width: 1.8rem;
+			height: 1.8rem;
+			text-align: center;
+			line-height: 1.6rem;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+			color: red;
+			font-weight: 600;
+			border: .1rem solid red;
+		}
+	
+		.jia {
+			color: white;
+			background: #FF1310;
+		}
+	
+		.jian {
+			color: gray;
+			border: .1rem solid gray;
+		}
+	
+		.lskdo {
+			text-align: center;
+			width: 2.0rem;
+			background: white;
+			border: none;
+		}
+	
+		/*--------------按钮-----------------------*/
+	
+	
+		/*购物车内容*/
+		.shop-car {
+			position: fixed;
+			bottom: 4.9rem;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+	
+		.shop-content {
+			position: absolute;
+			bottom: -0.6rem;
+			background-color: white;
+			height: 0;
+			width: 100%;
+			overflow: hidden;
+		}
+	
+		.shop-tit,
+		.baozhuang,
+		.youhui {
+			display: flex;
+			display: -webkit-flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 5.0rem;
+		}
+	
+		.shop-ul {
+			width: 100%;
+			height: 21.6rem;
+			padding: 0 1.0rem;
+			box-sizing: border-box;
+			overflow-Y: scroll;
+		}
+	
+		.shop-tit {
+			background-color: #F8F8F8;
+			padding: 0 1.0rem;
+			box-sizing: border-box;
+		}
+	
+		.shop-tit > span {
+			font-size: 1.6rem;
+			font-family: PingFang-SC-Medium;
+			font-weight: 500;
+			color: rgba(153, 153, 153, 1);
+		}
+	
+		#xx {
+			width: 1.5rem;
+			height: 1.5rem;
+			display: flex;
+			display: -webkit-flex;
+			justify-content: center;
+			align-items: center;
+		}
+	
+		.shop-li {
+			display: flex;
+			display: -webkit-flex;
+			align-items: center;
+			height: 5.0rem;
+			border-bottom: .1rem solid rgba(238, 238, 238, 1);
+		}
+	
+		.car-left {
+			width: 26.6rem;
+			display: flex;
+			display: -webkit-flex;
+			justify-content: space-between;
+			margin-right: 1.0rem;
+		}
+	
+		.car-right {
+			width: calc(100% - 12.6rem);
+			display: flex;
+			display: -webkit-flex;
+			justify-content: center;
+		}
+	
+		/*左边列表选中*/
+		.l-ul-article {
+			color: red !important;
+		}
+	
+	
+	</style>
+
+	</head>
+	<body>
+
+
+		<!--商品 tab-->
+		<div class="shop-tab">
+			<div class="sp-top">
+				<div>
+					<span class="sp-span-article sp">商品</span>
+				</div>
+				<div>
+					<span class="pl">评论 <i class="huis">(113)</i></span>
+				</div>
+			</div>
+			<!--tab-1-->
+			<div class="sp-bot-1">
+				<div class="bot-left">
+					<ul class="l-ul menu-left">
+						<!--第1个li-->
+						<li class="l-ul-article" data-id="1">猜你喜1<span class="li-b"></span></li>
+						<!--第2个li-->
+						<li data-id="2">猜你喜2<span class="li-b"></span></li>
+						<!--第3个li-->
+						<li data-id="3">猜你喜3<span class="li-b"></span></li>
+					</ul>
+				</div>
+
+				<!--对应第1个li-->
+				<div class="bot-right" data-ca-id="1" data-shop-id="6">
+					<p class="b-tit">端午佳节</p>
+					<ul class="r-ul">
+						<li class="r-ul-li" data-shop-id="1">
+							<div class="sp-b-l"><img alt="图片" src=""></div>
+							<div class="sp-b-r">
+								<p class="sp-b-r-p1">泰香aa 果仁asdxc红豆粽</p>
+								<p class="sp-b-r-p2">好吃不贵 特别实惠</p>
+								<p class="sp-b-r-p3">月售47</p>
+								<div class="sp-b-r-p4">
+									<span class="sp-b-r-p4-hong  lskdo_unit"><small>￥</small>1.01</span>
+									<div class="anniu">
+										<div class="prick">
+											<span class="jian">-</span>
+											<input class="lskdo" disabled="disabled" type="text" value="0" />
+											<span class="jia">+</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<!--对应第2个li-->
+				<div class="bot-right" data-ca-id="2" style="display: none;">
+					<p class="b-tit">端午佳节</p>
+					<ul class="r-ul">
+						<li class="r-ul-li" data-shop-id="2">
+							<div class="sp-b-l"><img alt="图片" src=""></div>
+							<div class="sp-b-r">
+								<p class="sp-b-r-p1">泰1香23果仁11红豆粽</p>
+								<p class="sp-b-r-p2">好吃不贵 特别实惠</p>
+								<p class="sp-b-r-p3">月售47</p>
+								<div class="sp-b-r-p4">
+									<span class="sp-b-r-p4-hong  lskdo_unit"><small>￥</small>10.01</span>
+									<div class="anniu">
+										<div class="prick">
+											<span class="jian">-</span>
+											<input class="lskdo" disabled="disabled" type="text" value="0" />
+											<span class="jia">+</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="r-ul-li" data-shop-id="3">
+							<div class="sp-b-l"><img alt="图片" src=""></div>
+							<div class="sp-b-r">
+								<p class="sp-b-r-p1">泰香果asdsad仁红豆粽</p>
+								<p class="sp-b-r-p2">好吃不贵 特别实惠</p>
+								<p class="sp-b-r-p3">月售47</p>
+								<div class="sp-b-r-p4">
+									<span class="sp-b-r-p4-hong  lskdo_unit"><small>￥</small>188.01</span>
+									<div class="anniu">
+										<div class="prick">
+											<span class="jian">-</span>
+											<input class="lskdo" disabled="disabled" type="text" value="0" />
+											<span class="jia">+</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="r-ul-li" data-shop-id="4">
+							<div class="sp-b-l"><img alt="图片" src=""></div>
+							<div class="sp-b-r">
+								<p class="sp-b-r-p1">泰香果仁红123123豆粽</p>
+								<p class="sp-b-r-p2">好吃不贵 特别实惠</p>
+								<p class="sp-b-r-p3">月售47</p>
+								<div class="sp-b-r-p4">
+									<span class="sp-b-r-p4-hong  lskdo_unit"><small>￥</small>1012.01</span>
+									<div class="anniu">
+										<div class="prick">
+											<span class="jian">-</span>
+											<input class="lskdo" disabled="disabled" type="text" value="0" />
+											<span class="jia">+</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<!--对应第3个li-->
+				<div class="bot-right" data-ca-id="3" style="display: none;">
+					<p class="b-tit">端午佳节</p>
+					<ul class="r-ul">
+						<li class="r-ul-li" data-shop-id="5">
+							<div class="sp-b-l"><img alt="图片" src=""></div>
+							<div class="sp-b-r">
+								<p class="sp-b-r-p1">泰香果仁红豆粽</p>
+								<p class="sp-b-r-p2">好吃不贵 特别实惠</p>
+								<p class="sp-b-r-p3">月售47</p>
+								<div class="sp-b-r-p4">
+									<span class="sp-b-r-p4-hong  lskdo_unit"><small>￥</small>1.01</span>
+									<div class="anniu">
+										<div class="prick">
+											<span class="jian">-</span>
+											<input class="lskdo" disabled="disabled" type="text" value="0" />
+											<span class="jia">+</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="r-ul-li" data-shop-id="6">
+							<div class="sp-b-l"><img alt="图片" src=""></div>
+							<div class="sp-b-r">
+								<p class="sp-b-r-p1">泰香果仁红豆粽</p>
+								<p class="sp-b-r-p2">好吃不贵 特别实惠</p>
+								<p class="sp-b-r-p3">月售47</p>
+								<div class="sp-b-r-p4">
+									<span class="sp-b-r-p4-hong  lskdo_unit"><small>￥</small>1.01</span>
+									<div class="anniu">
+										<div class="prick">
+											<span class="jian">-</span>
+											<input class="lskdo" disabled="disabled" type="text" value="0" />
+											<span class="jia">+</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+
+			</div>
+			<!--tab-2-->
+			<div class="sp-bot-2" style="display: none;">
+				<ul>
+					<li>
+						<div class="nei">
+							<div class="n-1">
+								<img alt="头像" src="{RES}/img/canyin/购物车.png">
+								<span class="n-name">大白大便</span>
+								<span class="s-xing"><img alt="" src="{RES}/img/meirong/xing.png"></span>
+								<span class="s-xing"><img alt="" src="{RES}/img/meirong/xing.png"></span>
+								<span class="s-xing"><img alt="" src="{RES}/img/meirong/xing.png"></span>
+								<span class="s-xing"><img alt="" src="{RES}/img/meirong/xing2.png"></span>
+								<span class="s-xing"><img alt="" src="{RES}/img/meirong/xing2.png"></span>
+							</div>
+							<p class="n-txt">服务很好，皱巴巴的皮肤立马有弹性了，推荐各位朋友前去体验，大赞！</p>
+							<div class="imgs">
+								<img alt="图片" src="{RES}/img/canyin/购物车.png">
+								<img alt="图片" src="{RES}/img/canyin/购物车.png">
+								<img alt="图片" src="{RES}/img/canyin/购物车.png">
+							</div>
+						</div>
+						<p class="n-timer">2019.06.06 &nbsp;&nbsp;16:30</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!--购物车内容-->
+		<div class="shop-car" style="display: none;">
+			<div class="shop-content">
+				<p class="shop-tit"><span>已选商品</span><span id="xx">X</span></p>
+				<ul class="shop-ul selectedList shop-ul-wd">
+					<!--这个是选购商品列表-->
+					<!--			<li class="shop-li">-->
+					<!--				<div class="car-left"><span>商品1</span><span class="lskdo_unit">￥29.00</span></div>-->
+					<!--				<div class="car-right">-->
+					<!--					<div class="prick">-->
+					<!--						<span class="jian">-</span>-->
+					<!--						<input class="lskdo" disabled="disabled" name="lskdo" type="text" value="0"/>-->
+					<!--						<span class="jia">+</span>-->
+					<!--					</div>-->
+					<!--				</div>-->
+					<!--			</li>-->
+
+
+					<!--下边是杂费-->
+					<p class="baozhuang"><span>包装费</span><span class="bz_price">￥3.00</span></p>
+					<p class="youhui"><span>优惠</span><span class="yh_price">￥3.00</span></p>
+				</ul>
+			</div>
+		</div>
+
+		<!--选好了-->
+		<div class="footer-buy">
+			<div class="box-l">
+				<div class="img" id="card">
+					<img alt="" src="{RES}/img/canyin/gouwuche.png">
+					<span class="titnum">0</span>
+				</div>
+				<div class="right">
+					<p class="f-r-p1 sum_price">
+						<small>￥</small>
+						0.00
+					</p>
+					<p class="f-r-p2">满<span class="fullReduction">50</span>元起送，还差<span class="priceSpread">0.31</span>元</p>
+				</div>
+			</div>
+			<div class="box-r" id="chosen" onclick="aaa()">
+				选好了
+			</div>
+		</div>
+
+		<div style="margin-top:5.2rem;height:.1rem;"></div>
+		<!--此div没有用-->
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+			var sp_top = $(".sp-top").find('div');
+			sp_top.on('click', function() {
+				sp_top.find('span').removeClass('sp-span-article');
+				$(this).find('span').addClass('sp-span-article');
+				/*切换请求*/
+				/*商品列表*/
+				if ($(this).index() == 0) {
+					$('.footer-buy').show();
+					$('.sp-bot-1').css('display', 'flex')
+					$('.sp-bot-2').css('display', 'none')
+					/*评论列表*/
+				} else {
+					$('.footer-buy').hide();
+					$('.sp-bot-2').css('display', 'block')
+					$('.sp-bot-1').css('display', 'none')
+				}
+
+			});
+
+			var card = $('#card');
+			var xx = $('#xx');
+			var shop_car = $('.shop-car');
+			var shopContent = $('.shop-content');
+			card.on('click', function() {
+				shop_car.fadeIn('100', function() {
+					shopContent.animate({
+						height: '26.6rem'
+					}, '300')
+				})
+			});
+			xx.on('click', function() {
+				shopContent.animate({
+					height: '0px'
+				}, '50', function() {
+					shop_car.fadeOut('100')
+				})
+			});
+
+			/*购物车*/
+			var priceNum = 0,
+				/*总价钱*/
+				shopNum = 0; /*总数量*/
+			var thatNums = [];
+			var bz_price = 0; /*包装费*/
+			/*左边类别事件*/
+			var num_left = 0;
+			$('.menu-left').on('click', 'li', function(id) {
+				$('.menu-left>li').removeClass('l-ul-article');
+				$(this).addClass('l-ul-article');
+				if (isNaN(parseInt($('.menu-left .l-ul-article .li-b span').text()))) {
+					num_left = 0;
+				} else {
+					num_left = parseInt($('.menu-left .l-ul-article .li-b span').text());
+				}
+				var data_id = $(this).attr('data-id');
+				for (var i = 0; i < $('.bot-right').length; i++) {
+					if ($('.bot-right').eq(i).attr('data-ca-id') == data_id) {
+						$('.bot-right').hide();
+						$('.bot-right').eq(i).show();
+						break;
+					}
+				}
+			});
+
+			/*杂费*/
+			function petty(num) {
+				console.log('debug ===> 当前包装费 ************************');
+				console.log(num);
+				bz_price += Math.round(Number(num) * 100) / 100;
+				bz_price = Math.round(Number(bz_price) * 100) / 100;
+				$('.bz_price').html('￥' + bz_price);
+			}
+
+			/*计算函数*/
+			/*加加*/
+			$('ul').on('click', '.jia', function() {
+				var nums = $(this).siblings(".lskdo"); /*数量*/
+				var unit = $(this).parents('li').find('.lskdo_unit').text().substring(1); /*单价*/
+				var dataPacking = $(this).parents('li').attr('data-packing'); /*包装费*/
+				petty(dataPacking);
+				/*单个商品总价*/
+				var sum = Math.round(Number(unit) * 100) / 100;
+				if (parseInt(nums.val()) < 99) {
+					shopNum += 1;
+					priceSum_jia(shopNum, sum);
+					/*TODO--在这里请求*/
+				}
+				nums.val(parseInt(nums.val()) + 1 > 99 ? '99' : parseInt(nums.val()) + 1);
+				car($(this), 1);
+			});
+			/*减减*/
+			$('ul').on('click', '.jian', function() {
+				var nums = $(this).siblings(".lskdo"); /*数量*/
+				var unit = $(this).parents('li').find('.lskdo_unit').text().substring(1); /*单价*/
+				var dataPacking = $(this).parents('li').attr('data-packing'); /*包装费*/
+				petty(-dataPacking);
+				/*单个商品总价*/
+				var sum = Math.round(Number(unit) * 100) / 100;
+				if (parseInt(nums.val()) > 0) {
+					shopNum -= 1;
+					priceSum_min(shopNum, sum);
+
+				}
+				nums.val(parseInt(nums.val()) - 1 < 0 ? '0' : parseInt(nums.val()) - 1);
+				car($(this), 2);
+
+			});
+
+			/*加 计算*/
+			function priceSum_jia(num, sumPrice) {
+				$('.l-ul-article>span').html('<span>' + (num_left += 1) + '</span>');
+				if (num > 99) return;
+				/*总和价钱*/
+				priceNum += Math.round(Number(sumPrice) * 100) / 100;
+				priceNum = Math.round(Number(priceNum) * 100) / 100;
+				/*TODO--在这里请求*/
+				// var couponPrice = 0;
+				// console.log('debug ===> 在这里请求 ************************');
+				// console.log('在这里请求');
+				// $.post(window.location.href, {}, function(data) {
+				// 	console.log(data);
+				// 	if (data.code == '0') {
+				// 		couponPrice = data.data.price;
+				// 		$('.yh_price').html('￥' + couponPrice);
+				// 		$('.sum_price').html('<small>￥</small>' + priceNum - couponPrice);
+				// 	} else {
+				// 		$('.sum_price').html('<small>￥</small>' + priceNum);
+				// 	}
+				// }, "json");
+
+				$('.sum_price').html('<small>￥</small>' + priceNum);
+				spreadPrice($('.sum_price').text());
+				$('.titnum').html(num);
+			}
+
+			/*减 计算*/
+			function priceSum_min(num, sumPrice) {
+				if (parseInt($('.menu-left .l-ul-article .li-b').text()) <= 1) {
+					$('.l-ul-article>span').html('<span style="display: none;">' + (num_left = 0) + '</span>');
+					$('.menu-left .l-ul-article .li-b span').hide();
+				} else {
+					$('.l-ul-article>span').html('<span>' + (num_left -= 1) + '</span>');
+				}
+				if (num < 0) {
+					return;
+				}
+				/*总和价钱*/
+				priceNum -= Math.round(Number(sumPrice) * 100) / 100;
+				priceNum = Math.round(Number(priceNum) * 100) / 100;
+				/*TODO--在这里请求*/
+				var couponPrice = 0;
+				// $.post(
+				// 	window.location.href, {},
+				// 	function(data) {
+				// 		console.log(data);
+				// 		if (data.code == '0') {
+				// 			couponPrice = data.data.price;
+				// 			$('.yh_price').html('￥' + couponPrice);
+				// 			$('.sum_price').html('<small>￥</small>' + priceNum - couponPrice);
+				// 		} else {
+				// 			$('.sum_price').html('<small>￥</small>' + priceNum);
+				// 		}
+				// 	}, "json"
+				// );
+				$('.sum_price').html('<small>￥</small>' + priceNum);
+				spreadPrice($('.sum_price').text());
+				$('.titnum').html(num);
+			}
+
+			/*满减优惠*/
+			function spreadPrice(val) {
+				var FullReduction = Number($('.fullReduction').text());
+				var valPrice = Math.round(Number(val.substring(1)) * 100) / 100;
+				var parce_num = 0;
+				if (valPrice < FullReduction) {
+					parce_num = Math.round(Number(FullReduction - valPrice) * 100) / 100;
+					if (parce_num <= 0) {
+						parce_num = 0;
+					}
+					$('.priceSpread').html(parce_num);
+				} else {
+					$('.priceSpread').html('0');
+				}
+			}
+
+			/* car */
+			var newArr = new Array();
+
+			function car(that, type) {
+				$('.selectedList').find('li').remove();
+				if ($(that).parents('li').attr('class') == 'shop-li') {
+					/* 当前代码块标识点击的是购物车里东西 */
+				} else {
+					var newObj = new Object();
+					newObj.id = $(that).parents('li').attr('data-shop-id');
+					newObj.name = ($(that).parents('li').find('.sp-b-r-p1')).text();
+					newObj.price = ($(that).parents('li').find('.lskdo_unit').text()).substring(1);
+					newObj.num = $(that).parents('li').find('.lskdo').val();
+					if (newArr.length == 0) {
+						newArr.push(newObj);
+					} else {
+						for (var i = 0; i < newArr.length; i++) {
+							if (newArr[i].id == newObj.id) {
+								newArr.splice(i, 1, newObj);
+							} else {
+								newArr.push(newObj);
+							}
+						}
+					}
+					var allArr = [];
+					for (var i = 0; i < newArr.length; i++) {
+						var flag = true;
+						for (var l = 0; l < allArr.length; l++) {
+							if (newArr[i].id == allArr[l].id) {
+								flag = false;
+							}
+						}
+						if (flag) {
+							allArr.push(newArr[i]);
+						}
+					}
+					var dataArr = [];
+					for (var j = 0; j < allArr.length; j++) {
+						if (allArr[j].num != 0) {
+							dataArr.push(allArr[j]);
+							car_rnder(allArr[j]);
+						}
+					}
+					console.log('debug ===> 提交给后端的 数据 ************************');
+					console.log(dataArr);
+					thatNums = dataArr;
+				}
+			}
+
+			/*购物车渲染*/
+			function car_rnder(obj) {
+				// var template = '<li class="shop-li" data-li-id="' + obj.id + '">\n' +
+				// 	'\t\t\t\t<div class="car-left"><span>' + obj.name + '</span><span class="lskdo_unit">￥' + obj.price + '</span></div>\n' +
+				// 	'\t\t\t\t<div class="car-right">\n' +
+				// 	'\t\t\t\t\t<div class="prick">\n' +
+				// 	'\t\t\t\t\t\t<span class="jian">-</span>\n' +
+				// 	'\t\t\t\t\t\t<input class="lskdo" disabled="disabled" name="lskdo" type="text" value="' + obj.nums + '"/>\n' +
+				// 	'\t\t\t\t\t\t<span class="jia">+</span>\n' +
+				// 	'\t\t\t\t\t</div>\n' +
+				// 	'\t\t\t\t</div>\n' +
+				// 	'\t\t\t</li>';
+				var template = '<li class="shop-li" data-li-id="' + obj.id + '">\n' +
+					'\t\t\t\t<div class="car-left"><span>' + obj.name + '</span><span class="lskdo_unit">￥' + obj.price +
+					'</span></div>\n' +
+					'\t\t\t\t<div class="car-right">\n' +
+					'\t\t\t\t\t<div class="prick">\n' +
+					'\t\t\t\t\t\t<input class="lskdo" disabled="disabled" name="lskdo" type="text" value="' + obj.num + '"/>\n' +
+					'\t\t\t\t\t</div>\n' +
+					'\t\t\t\t</div>\n' +
+					'\t\t\t</li>';
+				$('.selectedList').prepend(template);
+			}
+
+			/*选好了*/
+			$('#chosen').on('click', function() {
+				if (priceNum < 20) {
+					alert("亲，满20起送！");
+					return false;
+				}
+				var sId = {};
+				sId.sid = thatNums;
+				$.post(
+					window.location.href, {},
+					function(data) {
+						console.log(data);
+						if (data.type == '0') {
+
+							window.location.href = 'http://baidu.com';
+						} else {
+
+						}
+					}, "json"
+				);
+				alert("总价钱：" + priceNum + "总数量：" + shopNum + "订单信息：" + JSON.stringify(sId));
+			})
+		</script>
+	</body>
+</html>
